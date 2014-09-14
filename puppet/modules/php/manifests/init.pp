@@ -22,7 +22,6 @@ class php {
   exec { "reload-php-fpm":
     command => "/etc/init.d/php5-fpm reload",
     require => Service["php5-fpm"],
-    refreshonly => true,
   }
 
 }
