@@ -28,8 +28,7 @@ class mysql {
     require => Service['mysql'];
   }
 
-  exec { "create-$mysql::params::dbname-db":
-    unless  => "mysqladmin -uroot -p$mysql::params::password  status",
+  exec { "setup-$mysql::params::dbname-db":
     command => "mysqladmin -uroot -p$mysql::params::password create $mysql::params::dbname",
     path    => ['/bin', '/usr/bin'],
     require => Service['mysql'],
