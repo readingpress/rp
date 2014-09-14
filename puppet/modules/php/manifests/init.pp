@@ -1,8 +1,7 @@
 class php {
 
   # Install the php5-fpm and php5-cli packages
-  package { ['php5-fpm',
-             'php5-cli']:
+  package { 'php5-fpm':
     ensure => present,
     require => Exec['apt-get update'],
   }
@@ -14,7 +13,8 @@ class php {
   }
 
   # Add any additional packages 
-  package { [ 'php5-gd']:
+  package { [ 'php5-gd',
+              'php5-mysql']:
     ensure => installed,
   }
 
