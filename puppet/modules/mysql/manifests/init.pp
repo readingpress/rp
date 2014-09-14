@@ -1,6 +1,6 @@
 class mysql {
 
-  include mysql::params
+  include settings
 
   # Install mysql
   package { ['mysql-server']:
@@ -23,13 +23,13 @@ class mysql {
 
   # We set the root password here
   exec { 'add-mysql-password':
-    command => "mysqladmin -uroot password $mysql::params::password",
+    command => "mysqladmin -uroot password $settings::mysql_root_password",
     path    => ['/bin', '/usr/bin'],
     require => Service['mysql'];
   }
 
-  exec { "setup-$mysql::params::dbname-db":
-    command => "mysqladmin -uroot -p$mysql::params::password create $mysql::params::dbname",
+  exec { "setup-$settings::db_name-db":
+    command => "mysqladmin -uroot -p$settings::mysql_root_password create $settings::db_name",
     path    => ['/bin', '/usr/bin'],
     require => Service['mysql'],
   }
