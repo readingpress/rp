@@ -28,7 +28,7 @@ class mysql {
     require => Service['mysql'];
   }
 
-  exec { "setup-$settings::db_name-db":
+  exec { "setup-$mysql::params::dbname-db":
     command => "mysqladmin -uroot -p$mysql::params::password create $mysql::params::dbname",
     path    => ['/bin', '/usr/bin'],
     require => Service['mysql'],
