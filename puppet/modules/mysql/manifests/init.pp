@@ -23,13 +23,14 @@ class mysql {
 
   # We set the root password here
   exec { 'set-mysql-password':
-    command => "mysqladmin -u$mysql::params::username password $mysql::params::password",
+    command => "mysqladmin -uroot password $mysql::params::password",
     path    => ['/bin', '/usr/bin'],
     require => Service['mysql'];
   }
 
   exec { "create-$mysql::params::dbname-db":
-    command => "mysqladmin -u$mysql::params::username -p$mysql::params::password create $mysql::params::dbname",
+    unless  => "mysqladmin -uroot -p$mysql::params::password  status",
+    command => "mysqladmin -uroot -p$mysql::params::password create $mysql::params::dbname",
     path    => ['/bin', '/usr/bin'],
     require => Service['mysql'],
   }
