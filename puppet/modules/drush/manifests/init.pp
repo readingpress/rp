@@ -1,30 +1,18 @@
 class drush {
 
   include drush::params
+  include pear
 
-  package { 'Console_Table':
-    ensure   => present,
-    provider => pear,
-    require  => Package['php-pear'],
+  # If no version number is supplied, the latest stable release will be
+  # installed. In this case, upgrade PEAR to 1.9.2+ so it can use
+  # pear.drush.org without complaint.
+  pear::package { "PEAR": }
+  pear::package { "Console_Table": }
+
+  # Version numbers are supported.
+  pear::package { "drush":
+    version => $drush::params::version,
+    repository => "pear.drush.org",
   }
 
-  exec { 'fetch-drush':
-    cwd     => '/tmp',
-    command => "/usr/bin/git clone --branch $drush::params::branch_name http://git.drupal.org/project/drush.git",
-    creates => '/tmp/drush',
-    require => Package['php5-cli', 'php-pear', 'Console_Table', 'git-core'], 
-  }
-
-  file { '/usr/local/lib/drush':
-    ensure  => directory,
-    recurse => true,
-    purge   => true,
-    source  => '/tmp/drush',
-    require => Exec['fetch-drush'],
-  }
-
-  file { '/usr/local/bin/drush':
-    ensure  => '/usr/local/lib/drush/drush',
-    require => File['/usr/local/lib/drush'],
-  }
 }
