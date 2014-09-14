@@ -22,7 +22,7 @@ class mysql {
   }
 
   # We set the root password here
-  exec { 'set-mysql-password':
+  exec { 'add-mysql-password':
     command => "mysqladmin -uroot password $mysql::params::password",
     path    => ['/bin', '/usr/bin'],
     require => Service['mysql'];
