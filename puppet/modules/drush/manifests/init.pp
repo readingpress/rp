@@ -15,4 +15,10 @@ class drush {
     repository => "pear.drush.org",
   }
 
+  # Ensure that the files directory exists and is writable.
+  file { '/vagrant/app/sites/default/files' :
+    ensure => directory,
+    mode   => '0775',
+  }
+
 }
