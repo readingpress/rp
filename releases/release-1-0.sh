@@ -10,3 +10,7 @@ RELEASE_TAG="${RELEASE_TAG%.*}"
 drush site-install standard --account-name=rp --account-pass=rp
 drush vset site_name 'Reading Press' -y
 drush vset site_mail 'noreply@readingpress.com' -y
+
+drush en stark -y
+drush dis bartik -y
+drush vset theme_default 'stark' -y
