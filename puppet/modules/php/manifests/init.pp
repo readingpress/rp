@@ -17,10 +17,12 @@ class php {
   package { [ 'php5-gd']:
     ensure => installed,
   }
-  
-  # Allow for a custom php.ini
-  file { "/etc/php.ini":
-    source => "puppet:///modules/php/files/php.ini",
+
+  # Reload php
+  exec { "reload-php-fpm":
+    command => "/etc/init.d/php-fpm reload",
+    require => Service["php-fpm"],
+    refreshonly => true,
   }
 
 }
