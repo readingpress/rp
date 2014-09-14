@@ -551,3 +551,11 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  * Remove the leading hash signs to disable.
  */
 # $conf['allow_authorize_operations'] = FALSE;
+
+/**
+ *	Secret settings file. This should never be committed.
+ */
+$conf_path = conf_path();
+if (file_exists('./' . $conf_path . '/local.settings.php')) {
+	require('./' . $conf_path . '/local.settings.php');
+}
