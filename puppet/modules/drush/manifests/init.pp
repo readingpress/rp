@@ -11,7 +11,7 @@ class drush {
 
   # Version numbers are supported.
   pear::package { "drush":
-    version => settings::drush_version,
+    version => $settings::drush_version,
     repository => "pear.drush.org",
   }
 
