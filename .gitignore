@@ -1,2 +1,3 @@
 .vagrant
-app/sites/default/local.settings.php
+app/sites/*/local.settings.php
+app/sites/*/files
