@@ -6,4 +6,4 @@ file { '/var/www/':
   ensure => 'directory',
 }
 
-include settings, nginx, php, mysql, pear, drush
+include nginx, php, mysql, pear, drush

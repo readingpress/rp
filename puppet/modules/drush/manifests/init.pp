@@ -1,6 +1,6 @@
 class drush {
 
-  include settings
+  include drush::params
   include pear
 
   # If no version number is supplied, the latest stable release will be
@@ -11,7 +11,7 @@ class drush {
 
   # Version numbers are supported.
   pear::package { "drush":
-    version => $settings::drush_version,
+    version => $drush::params::version,
     repository => "pear.drush.org",
   }
 
